@@ -39,8 +39,10 @@ public class Main {
 				default:
 					System.out.println("INVALID CHOICE");
 			}
-			System.out.println("\n\n");
-			// How to make a user input click so that it'll proceed manually rather than automatically?'
+			System.out.println("PRESS ENTER TO CONTINUE");
+			scanner.nextLine();
+			scanner.nextLine();
+			// How to make a user input click so that it'll proceed manually rather than automatically?' -> found ✓
 		}
 		
 		System.out.println("***************************");
@@ -52,6 +54,7 @@ public class Main {
 	
 	static void showBalance(double balance) {
 		System.out.printf("$%.2f\n", balance);
+		System.out.println("*****************");
 	}
 	static double deposit() {
 		
@@ -63,6 +66,7 @@ public class Main {
 		
 		if(amount < 0) {
 			System.out.println("INVALID AMOUNT");
+			System.out.println("*****************");
 			return 0;
 		}
 		else {
@@ -80,10 +84,12 @@ public class Main {
 		
 		if(amount < 0) {
 			System.out.println("INVALID AMOUNT");
+			System.out.println("*****************");
 			return 0;
 		}
 		else if(amount > balance) {
 			System.out.println("INSUFFICIENT FUNDS");
+			System.out.println("*****************");
 			return 0;
 		}
 		else {

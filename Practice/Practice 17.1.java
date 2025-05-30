@@ -1,14 +1,15 @@
 public class Main {
 	public static void main(String[] args) {
 		
-		int rows = 4;
-		int columns = 4;
-		int count = 1;
+		int rows = 6;
+		int columns = 9;
 		char symbol = 'Y';
+		boolean isBorder;
 		
 		for(int i = 0; i < rows; i++) {
 			for(int  j = 0; j < columns; j++) {
-				if((i == 0 || i == 3) || (j == 0 || j == 3)) {
+				isBorder = (i == 0 || i == rows - 1) || (j == 0 || j == columns - 1);
+				if(isBorder) {
 					System.out.print(symbol + " ");	
 				}
 				else{
