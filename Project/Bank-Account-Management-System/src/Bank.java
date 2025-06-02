@@ -80,6 +80,10 @@ public class Bank {
         InputHandler.lineBreak();
     }
     
+    void removeClient() {
+        
+    }
+    
     void showAllClient() {
         for(Account account : accounts) {
             account.displayInfo();
