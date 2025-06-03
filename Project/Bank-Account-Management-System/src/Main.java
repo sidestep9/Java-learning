@@ -7,10 +7,13 @@ public class Main {
 					 	int choice;
 					 	boolean isExit = false;
 					 	Bank bank = new Bank();
+					 	AdminHandler adminHandler = new AdminHandler(bank);
+					 	ClientHandler clientHandler = new ClientHandler(bank);
 								
 					 	//		test
 					 	bank.addAdminTemporary();
-					 	AdminHandler.adminMenu();
+					 	bank.addClientTemporary();
+					 	clientHandler.clientCredential();
 					 	
 			/*		 	do {
 					 		 	InputHandler.lineBreak();
@@ -24,7 +27,10 @@ public class Main {
 					 		 	InputHandler.lineBreak();
 					 		 	switch(choice) {
 					 		 		 	case 1:
-					 		 		 	   AdminHandler.adminCredential();
+					 		 		 	   adminHandler.adminCredential();
+					 		 		 	break;
+					 		 		 	case 2:
+					 		 		 	    clientHandler.clientCredential();
 					 		 		 	break;
 					 		 		 	case 3:
 					 		 		 	   isExit = true;

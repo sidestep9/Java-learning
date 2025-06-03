@@ -19,6 +19,22 @@ public class InputHandler {
         }
     }
     
+    static double inputDouble(String prompt) {
+        double num;
+        while(true) {
+            System.out.print(prompt);
+            if(scanner.hasNextDouble()) {
+                num = scanner.nextDouble();
+                scanner.nextLine();
+                return num;
+            }
+            else {
+                System.out.println("MUST CONTAIN ONLY NUMBER");
+                scanner.nextLine();
+            }
+        }
+    }
+    
     static String inputLine(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine().trim();

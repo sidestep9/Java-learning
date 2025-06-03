@@ -1,13 +1,17 @@
 
 public class AdminHandler {
     
-    private static Bank bank = new Bank();
+    private Bank bank;
     
-    static void adminCredential() {
+    AdminHandler(Bank bank) {
+        this.bank = bank;
+    }
+    
+    
+    void adminCredential() {
         String userName;
         int pin;
         Account admin;
-        bank.addAdminTemporary();
         
         userName = InputHandler.inputLine("ENTER USERNAME: ");
         pin = InputHandler.inputInt("ENTER PIN: ");
@@ -23,8 +27,9 @@ public class AdminHandler {
         }
     }
     
-    static void adminMenu() {
+    void adminMenu() {
         int choice;
+        String target;
         boolean isExit = false;
         
         while(!isExit) {
@@ -46,6 +51,13 @@ public class AdminHandler {
                 break;
                 case 3:
                     bank.addRemoveClient();
+                break;
+                case 4:
+                    target = InputHandler.inputLine("ENTER ID/USERNAME: ");
+                    bank.searchClient(target).displayInfo();
+                break;
+                case 5:
+                    bank.updateClientInfo();
                 break;
                 case 6:
                     isExit = true;
