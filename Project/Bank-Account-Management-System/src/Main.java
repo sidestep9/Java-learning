@@ -13,17 +13,14 @@ public class Main {
 					 	//		test
 					 	accountHandler.addAdminTemporary();
 					 	accountHandler.addClientTemporary();
-					 	InputHandler.lineBreak();
 					 	
 					 	do {
 					 		 	InputHandler.lineBreak();
-					 		 	System.out.println("BANK SIMULATOR");
-					 		 	InputHandler.lineBreak();
-					 		 	System.out.println("[1] ADMIN");
-					 		 	System.out.println("[2] CLIENT");
-					 		 	System.out.println("[3] EXIT");
-					 		 	InputHandler.lineBreak();
-					 		 	choice = InputHandler.inputInt("ENTER (1-3): ");
+					 		 	choice = MenuUtils.showMenu("=== BANK SIMULATOR ===",
+					 		 	                            "ENTER (1-3): ",
+					 		 	                            "[1] ADMIN",
+					 		 	                            "[2] CLIENT",
+					 		 	                            "[3] EXIT");
 					 		 	InputHandler.lineBreak();
 					 		 	switch(choice) {
 					 		 		 	case 1:

@@ -35,14 +35,14 @@ public class AdminHandler {
     boolean isExit = false;
     
    while(!isExit) {
-      System.out.println("[1] SHOW ALL CLIENT");
-      System.out.println("[2] SHOW ALL TRANSACTION");
-      System.out.println("[3] ADD/REMOVE CLIENT");
-      System.out.println("[4] SEARCH CLIENT");
-      System.out.println("[5] UPDATE CLIENT INFO");
-      System.out.println("[6] EXIT");
-      InputHandler.lineBreak();
-      choice = InputHandler.inputInt("ENTER (1-6): ");
+      choice = MenuUtils.showMenu("=== ADMIN MENU ===",
+                                  "ENTER (1-6): ",
+                                  "[1] SHOW ALL CLIENT", 
+                                  "[2] SHOW ALL TRANSACTION", 
+                                  "[3] ADD/REMOVE CLIENT", 
+                                  "[4] SEARCH CLIENT",
+                                  "[5] UPDATE CLIENT INFO", 
+                                  "[6] EXIT");
       InputHandler.lineBreak();
       switch(choice) {
         case 1:
@@ -79,7 +79,11 @@ public class AdminHandler {
       System.out.println("[2] REMOVE CLIENT");
       System.out.println("[3] EXIT");
       InputHandler.lineBreak();
-      choice = InputHandler.inputInt("ENTER (1-3): ");
+      choice = MenuUtils.showMenu("=== ADD/REMOVE CLIENT ===",
+                                  "ENTER (1-3): ",
+                                  "[1] ADD NEW CLIENT",
+                                  "[2] REMOVE CLIENT",
+                                  "[3] EXIT");
       InputHandler.lineBreak();
       switch(choice) {
         case 1:
@@ -126,9 +130,11 @@ public class AdminHandler {
       InputHandler.lineBreak();
       return;
     }
+    client.displayInfo();
+    InputHandler.lineBreak();
     confirm = InputHandler.inputLine("CONFIRM REMOVAL (Y/N): ").toLowerCase();
     System.out.println();
-    if(adminService.confirmation(confirm)) {
+    if(accountHandler.confirmation(confirm)) {
       adminService.removeClient(client);
     }
     InputHandler.lineBreak();

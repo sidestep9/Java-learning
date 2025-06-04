@@ -31,6 +31,18 @@ public class AccountHandler {
       return false;
     }
   }
+    boolean confirmation(String confirm) {
+      switch(confirm) {
+        case "y":
+        return true;
+        case "n":
+          System.out.println("ACTION ABORTED");
+        return false;
+        default:
+         System.out.println("INVALID INPUT. ACTION ABORTED");
+        return false;
+      }
+    }
     void addClient(Client client) {
         accounts.add(client);
     }

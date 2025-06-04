@@ -31,18 +31,6 @@ public class AdminService {
     }
     return true;
   }
-  boolean confirmation(String confirm) {
-    switch(confirm) {
-      case "y":
-      return true;
-      case "n":
-        System.out.println("ACTION ABORTED");
-      return false;
-      default:
-        System.out.println("INVALID INPUT. ACTION ABORTED");
-      return false;
-    }
-  }
   
   void showAllClient() {
     for(Account account : accountHandler.accounts) {

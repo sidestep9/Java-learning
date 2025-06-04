@@ -11,15 +11,16 @@ public class ClientHandler {
     }
     
     void clientCredential() {
-        String username;
+        String userName;
         int pin;
         
-        username = InputHandler.inputLine("ENTER USERNAME: ");
+        userName = InputHandler.inputLine("ENTER USERNAME: ");
         pin = InputHandler.inputInt("ENTER PIN: ");
-        this.client = (Client) accountHandler.searchClient(username);
+        InputHandler.lineBreak();
+        this.client = (Client) accountHandler.searchClient(userName);//this still apply by using ID
         clientService.currentClient(client);
         
-        if(client == null || client.pin != pin) {
+        if(client == null || !client.userName.equals(userName) || client.pin != pin) {
             System.out.println("WRONG USERNAME/PIN");
             return;
         }
@@ -39,14 +40,14 @@ public class ClientHandler {
         InputHandler.lineBreak();
         
         do {
-            System.out.println("[1] SHOW BALANCE");
-            System.out.println("[2] DEPOSIT");
-            System.out.println("[3] WITHDRAW");
-            System.out.println("[4] TRANSFER");
-            System.out.println("[5] TRANSACTION HISTORY");
-            System.out.println("[6] LOG OUT");
-            InputHandler.lineBreak();
-            choice = InputHandler.inputInt("ENTER (1-6): ");
+            choice = MenuUtils.showMenu("=== CLIENT MENU ===",
+                                        "ENTER (1-6): ",
+                                        "[1] SHOW BALANCE", 
+                                        "[2] DEPOSIT", 
+                                        "[3] WITHDRAW", 
+                                        "[4] TRANSFER",
+                                        "[5] TRANSACTION HISTORY", 
+                                        "[6] EXIT");
             InputHandler.lineBreak();
             switch(choice) {
                 case 1:
@@ -90,11 +91,6 @@ public class ClientHandler {
       double sum;
       sum = InputHandler.inputDouble("ENTER AMOUNT: ");
       InputHandler.lineBreak();
-      if(sum > client.balance) {
-        System.out.println("INSUFFICIENT BALANCE");
-        InputHandler.lineBreak();
-        return;
-      }
       clientService.withdraw(sum);
       InputHandler.lineBreak();
     }
@@ -106,24 +102,8 @@ public class ClientHandler {
       target = InputHandler.inputLine("ENTER TARGET ID/USERNAME: ");
       InputHandler.lineBreak();
       targetClient = (Client) accountHandler.searchClient(target);
-      if(accountHandler.clientNull(targetClient)) {
-        InputHandler.lineBreak();
-        return;
-      }
-      targetClient.summary();
-      InputHandler.lineBreak();
-      if(client == targetClient) {
-        System.out.println("CANNOT TRANSFER TO SELF");
-        InputHandler.lineBreak();
-        return;
-      }
       sum = InputHandler.inputDouble("ENTER TRANSFER AMOUNT: ");
       InputHandler.lineBreak();
-      if(sum > client.balance) {
-        System.out.println("INSUFFICIENT BALANCE");
-        InputHandler.lineBreak();
-        return;
-      }
       clientService.transfer(sum, targetClient);
       InputHandler.lineBreak();
     }
