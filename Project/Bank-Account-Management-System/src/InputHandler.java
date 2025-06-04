@@ -26,6 +26,10 @@ public class InputHandler {
             if(scanner.hasNextDouble()) {
                 num = scanner.nextDouble();
                 scanner.nextLine();
+                if(num < 1) {
+                 System.out.println("INVALID AMOUNT");
+                 continue;
+                }
                 return num;
             }
             else {
