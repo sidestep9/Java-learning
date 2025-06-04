@@ -1,14 +1,13 @@
 
 public class Record {
     int num = 0;
-    static int counter = 1;
     String cause;
     double initialBalance;
     double sum;
     double finalBalance;
     
-    Record(String cause, double initialBalance, double sum, double finalBalance) {
-        this.num = counter++;
+    Record(int num, String cause, double initialBalance, double sum, double finalBalance) {
+        this.num = num;
         this.cause = cause;
         this.initialBalance = initialBalance;
         this.sum = sum;

@@ -1,11 +1,13 @@
 
 public class ClientHandler {
     
-    private Bank bank;
+    private AccountHandler accountHandler;
     private Client client;
+    ClientService clientService;
     
-    ClientHandler(Bank bank) {
-        this.bank = bank;
+    ClientHandler(AccountHandler accountHandler) {
+        this.accountHandler = accountHandler;
+        this.clientService = new ClientService(accountHandler);
     }
     
     void clientCredential() {
@@ -14,7 +16,8 @@ public class ClientHandler {
         
         username = InputHandler.inputLine("ENTER USERNAME: ");
         pin = InputHandler.inputInt("ENTER PIN: ");
-        this.client = (Client) bank.searchClient(username);
+        this.client = (Client) accountHandler.searchClient(username);
+        clientService.currentClient(client);
         
         if(client == null || client.pin != pin) {
             System.out.println("WRONG USERNAME/PIN");
@@ -22,6 +25,8 @@ public class ClientHandler {
         }
         else {
             System.out.println("WELCOME " + client.fullName);
+            InputHandler.lineBreak();
+            clientService.currentClient(client);
             clientMenu();
         }
     }
@@ -29,6 +34,9 @@ public class ClientHandler {
     void clientMenu() {
         int choice;
         boolean isExit = false;
+        
+        client.displayInfo();
+        InputHandler.lineBreak();
         
         do {
             System.out.println("[1] SHOW BALANCE");
@@ -39,22 +47,25 @@ public class ClientHandler {
             System.out.println("[6] LOG OUT");
             InputHandler.lineBreak();
             choice = InputHandler.inputInt("ENTER (1-6): ");
+            InputHandler.lineBreak();
             switch(choice) {
                 case 1:
                     System.out.println("BALANCE: " + client.balance);
+                    InputHandler.lineBreak();
                 break;
                 case 2:
-                    bank.clientDeposit(client);
+                    deposit();
                 break;
                 case 3:
-                    bank.clientWithdraw(client);
+                    withdraw();
                 break;
                 case 4:
-                    bank.clientTransfer(client);
+                    transfer();
                 break;
                 case 5:
                     for(Record record : client.records) {
                       record.showRecord();
+                      System.out.println();
                     }
                 break;
                 case 6:
@@ -66,5 +77,54 @@ public class ClientHandler {
                     System.out.println("INVALID CHOICE");
             }
         }while(!isExit);
+    }
+    
+    void deposit() {
+      double sum;
+      sum = InputHandler.inputDouble("ENTER AMOUNT: ");
+      InputHandler.lineBreak();
+      clientService.deposit(sum);
+      InputHandler.lineBreak();
+    }
+    void withdraw() {
+      double sum;
+      sum = InputHandler.inputDouble("ENTER AMOUNT: ");
+      InputHandler.lineBreak();
+      if(sum > client.balance) {
+        System.out.println("INSUFFICIENT BALANCE");
+        InputHandler.lineBreak();
+        return;
+      }
+      clientService.withdraw(sum);
+      InputHandler.lineBreak();
+    }
+    void transfer() {
+      double sum;
+      String target;
+      Client targetClient;
+      
+      target = InputHandler.inputLine("ENTER TARGET ID/USERNAME: ");
+      InputHandler.lineBreak();
+      targetClient = (Client) accountHandler.searchClient(target);
+      if(accountHandler.clientNull(targetClient)) {
+        InputHandler.lineBreak();
+        return;
+      }
+      targetClient.summary();
+      InputHandler.lineBreak();
+      if(client == targetClient) {
+        System.out.println("CANNOT TRANSFER TO SELF");
+        InputHandler.lineBreak();
+        return;
+      }
+      sum = InputHandler.inputDouble("ENTER TRANSFER AMOUNT: ");
+      InputHandler.lineBreak();
+      if(sum > client.balance) {
+        System.out.println("INSUFFICIENT BALANCE");
+        InputHandler.lineBreak();
+        return;
+      }
+      clientService.transfer(sum, targetClient);
+      InputHandler.lineBreak();
     }
 }

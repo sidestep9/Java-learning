@@ -11,6 +11,9 @@ public class Client extends Account{
 								this.id = nextClientId++;
 				}
 				
+				void summary() {
+				  super.displayInfo();
+				}
 				@Override
 				void displayInfo() {
 								super.displayInfo();

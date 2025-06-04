@@ -6,16 +6,16 @@ public class Main {
 					 	
 					 	int choice;
 					 	boolean isExit = false;
-					 	Bank bank = new Bank();
-					 	AdminHandler adminHandler = new AdminHandler(bank);
-					 	ClientHandler clientHandler = new ClientHandler(bank);
+					 	AccountHandler accountHandler = new AccountHandler();
+					 	AdminHandler adminHandler = new AdminHandler(accountHandler);
+					 	ClientHandler clientHandler = new ClientHandler(accountHandler);
 								
 					 	//		test
-					 	bank.addAdminTemporary();
-					 	bank.addClientTemporary();
-					 	clientHandler.clientCredential();
+					 	accountHandler.addAdminTemporary();
+					 	accountHandler.addClientTemporary();
+					 	InputHandler.lineBreak();
 					 	
-			/*		 	do {
+					 	do {
 					 		 	InputHandler.lineBreak();
 					 		 	System.out.println("BANK SIMULATOR");
 					 		 	InputHandler.lineBreak();
@@ -38,6 +38,6 @@ public class Main {
 		  			 		 	default:
     					 		 			System.out.println("INVALID CHOICE");
     					 	}
-					 	}while(!isExit); */
+					 	}while(!isExit); 
 				}
 }
