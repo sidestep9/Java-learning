@@ -3,7 +3,7 @@ public class Main {
     
     public static void main(String[] args) {
         MenuUI menuUI = new MenuUI();
-        AdminMenu adminMenu = new adminMenu();
+        AdminMenu adminMenu = new AdminMenu();
         int choice;
         boolean isExit = false;
         
@@ -15,6 +15,7 @@ public class Main {
                                      "[2] Teacher",
                                      "[3] Student",
                                      "[4] Exit");
+            InputUtil.divider();
             switch(choice) {
                 case 1:
                     adminMenu.mainMenu();
@@ -31,7 +32,3 @@ public class Main {
     }
     
 }
-
-// ADMIN
-// TEACHER
-// STUDENT

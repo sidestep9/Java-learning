@@ -9,6 +9,11 @@ public class InputUtil {
         System.out.println(symbol);
     }
     
+    public static void separator() {
+        String symbol = "–".repeat(17);
+        System.out.println(symbol);
+    }
+    
     private static String capitalizeName(String name) {
         String first;
         String rest;
@@ -50,7 +55,7 @@ public class InputUtil {
                 return num;
             }
             else {
-                System.out.println("MUST CONTAIN ONLY NUMBER");
+                System.out.println("Must only contain numbers");
                 scanner.nextLine();
             }
         }

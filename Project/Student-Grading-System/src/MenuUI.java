@@ -10,6 +10,7 @@ public class MenuUI {
             System.out.println(option);
         }
         System.out.println();
+        InputUtil.separator();
         return choice = InputUtil.inputInt(prompt);
     }
 }
