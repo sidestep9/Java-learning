@@ -1,5 +1,13 @@
 
 public class MenuUI {
+    void divider() {
+        String sym = "*".repeat(29);
+        System.out.println(sym);
+    }
+    void separator() {
+        String sym = "–".repeat(29);
+        System.out.println(sym);
+    }
     
     int showMenu(String title, String prompt, String... options) {
         int choice;
@@ -9,8 +17,7 @@ public class MenuUI {
         for(String option : options) {
             System.out.println(option);
         }
-        System.out.println();
-        InputUtil.separator();
-        return choice = InputUtil.inputInt(prompt);
+        separator();
+        return choice = InputHandler.inputInt(prompt);
     }
 }

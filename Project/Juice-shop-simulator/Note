@@ -1,0 +1,20 @@
+*Step*
+> Main
+    • Staff
+    • Customer
+    • Exit
+> Store
+    • Add juice (name, ingredients, price)
+    • Remove juice
+    • Update juice info (change name, ingredients, price)
+> Customer
+    • Show all juices
+    • Order juice
+    • Remove order
+    • Checkout
+
+*Bugs & Improvements*
+> Feels like there's too many ArrayLists
+> Juice info update: add ingredients update
+                        • Either rewrite the whole thing (which is I think the most realistic option for CLI program)
+                        • Or add/delete what's alreadt in the list (no idea how to)
