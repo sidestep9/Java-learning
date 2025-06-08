@@ -25,7 +25,7 @@ public class InputHandler {
         while(true) {
           System.out.print(prompt);
           text = scanner.nextLine().trim();
-          if(text.isEmpty() || text == null) {
+          if(text == null || text.isEmpty()) {
               System.out.println("Name cannot be empty");
               continue;
           }
@@ -43,8 +43,8 @@ public class InputHandler {
         String input;
         
         while(true) {
-           input = inputName(prompt);
-           if(input.equalsIgnoreCase("done")) {
+           input = inputText(prompt).toLowerCase();
+           if(input.equals("done")) {
                break;
            }
            if(input.isEmpty()) {
