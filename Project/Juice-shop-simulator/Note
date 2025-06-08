@@ -18,3 +18,4 @@
 > Juice info update: add ingredients update
                         • Either rewrite the whole thing (which is I think the most realistic option for CLI program)
                         • Or add/delete what's alreadt in the list (no idea how to)
+> Add multiple items (customer)

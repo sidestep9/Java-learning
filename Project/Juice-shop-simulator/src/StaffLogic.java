@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 
 public class StaffLogic {
-    JuiceLogic juiceLogic = new JuiceLogic();
+    JuiceLogic juiceLogic;
+    
+    StaffLogic(JuiceLogic juiceLogic) {
+        this.juiceLogic = juiceLogic;
+    }
     
     void addJuice(String name, double price, ArrayList<String> ingredients) {
         juiceLogic.juices.add(new Juice(name, price, ingredients));

@@ -2,12 +2,14 @@
 public class Main {
     public static void main(String[] args) {
         MenuUI menuUI = new MenuUI();
-        StaffHandler staffHandler = new StaffHandler();
-        CustomerHandler customerHandler = new CustomerHandler();
+        JuiceLogic juiceLogic = new JuiceLogic();
+        StaffHandler staffHandler = new StaffHandler(juiceLogic);
+        CustomerHandler customerHandler = new CustomerHandler(juiceLogic);
         int choice;
         boolean isExit = false;
         
         // temp
+        juiceLogic.temp();
         
         do {
             menuUI.divider();

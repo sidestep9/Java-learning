@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 
 public class CustomerLogic {
-    JuiceLogic juiceLogic = new JuiceLogic();
     ArrayList<Juice> orders = new ArrayList<>();
+    JuiceLogic juiceLogic;
+    
+    CustomerLogic(JuiceLogic juiceLogic) {
+        this.juiceLogic = juiceLogic;
+    }
     
     void addItem(String target) {
         Juice juice;
@@ -23,5 +27,22 @@ public class CustomerLogic {
         }
         orders.remove(juice);
         System.out.println("Item removed");
+    }
+    
+    void showCart(){
+        System.out.println("Item: ");
+        for(Juice order : orders) {
+            System.out.println(order.name);
+        }
+    }
+    
+    void checkout() {
+        double total = 0;
+        System.out.println("Item: ");
+        for(Juice order : orders) {
+            System.out.println(order.name + " $" + order.price);
+            total += order.price;
+        }
+        System.out.println("Total: $" + total);
     }
 }

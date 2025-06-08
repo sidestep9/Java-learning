@@ -1,15 +1,17 @@
 
 public class CustomerHandler {
     MenuUI menuUI = new MenuUI();
-    CustomerLogic customerLogic = new CustomerLogic();
-    JuiceLogic juiceLogic = new JuiceLogic();
+    CustomerLogic customerLogic;
+    JuiceLogic juiceLogic;
+    
+    CustomerHandler(JuiceLogic juiceLogic) {
+        this.juiceLogic = juiceLogic;
+        this.customerLogic = new CustomerLogic(juiceLogic);
+    }
     
     void menu() {
         int choice;
         boolean isExit = false;
-        
-        //temp
-        juiceLogic.temp();
         
         do {
             menuUI.divider();
@@ -32,9 +34,12 @@ public class CustomerHandler {
                     removeItem();
                 break;
                 case 4:
-                    
+                    customerLogic.showCart();
                 break;
                 case 5:
+                    checkout();
+                break;
+                case 6:
                     isExit = true;
                 break;
                 default:
@@ -52,5 +57,11 @@ public class CustomerHandler {
         String target;
         target = InputHandler.inputName("Enter name: ");
         customerLogic.removeItem(target);
+    }
+    
+    void checkout() {
+        customerLogic.checkout();
+        // confirmation
+        System.out.println("Thank you for your purchase!");
     }
 }

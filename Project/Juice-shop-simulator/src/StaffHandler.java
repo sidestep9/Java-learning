@@ -2,8 +2,13 @@ import java.util.ArrayList;
 
 public class StaffHandler {
     MenuUI menuUI = new MenuUI();
-    StaffLogic staffLogic = new StaffLogic();
-    JuiceLogic juiceLogic = new JuiceLogic();
+    StaffLogic staffLogic;
+    JuiceLogic juiceLogic;
+    
+    StaffHandler(JuiceLogic juiceLogic) {
+        this.juiceLogic = juiceLogic;
+        this.staffLogic = new StaffLogic(juiceLogic);
+    }
     
     void credential() {
         showMenu();

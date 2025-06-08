@@ -15,7 +15,7 @@ public class JuiceLogic {
     
     Juice searchJuice(String name) {
         for(Juice juice : juices) {
-            if(juice.name.equals(name)) {
+            if(juice.name.equalsIgnoreCase(name)) {
                 return juice;
             }
         }
