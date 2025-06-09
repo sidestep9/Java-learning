@@ -1,7 +1,8 @@
 *** BUGS & IMPROVEMENTS ***
 > room.displayInfo() -> make it only print once per type and display how many rooms are there and available (only for staff to see)
 > Not adding the 'Add/remove room' option for staff. I mean really? A staff adding/removing a hotel room willy-nilly?
-
+> Maybe make a unique guest account, but it's weird to make a guest register before booking
+> guest checkout payment
 
 *** FRAMEWORK ***
 > Main
@@ -11,7 +12,7 @@
     > (User) Guests
         • View all rooms
         • View bookings
-        • Book a room
+        • Book room
         • Cancel book
     > Exit
 > Hotel

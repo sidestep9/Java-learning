@@ -5,12 +5,13 @@ public class Room {
     String type;
     double price;
     boolean isAvailable;
+    int duration = 0;
     
     Room(String type, double price) {
         this.type = type;
         this.price = price;
         this.roomId = counter++;
-        this.isAvailable = false;
+        this.isAvailable = true;
     }
     
     void displayInfo() {
@@ -32,5 +33,11 @@ public class Room {
         else if(type.equalsIgnoreCase("suite")) {
             System.out.println("1 large bed, 2 single bed, and living area");
         }
+    }
+    
+    void bookInfo() {
+        System.out.printf("Room %d\n", roomId);
+        System.out.println("Type       : " + type);
+        System.out.println("Duration   : " + duration + " day" + (duration <= 1 ? "" : "s"));
     }
 }

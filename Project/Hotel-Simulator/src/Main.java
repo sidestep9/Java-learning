@@ -9,6 +9,7 @@ public class Main {
         
         MenuUI menuUI = new MenuUI();
         StaffHandler staffHandler = new StaffHandler(staff, hotel);
+        GuestHandler guestHandler = new GuestHandler(hotel);
         int choice;
         boolean isExit = false;
         
@@ -21,7 +22,10 @@ public class Main {
                                      "[3] Exit");
             switch(choice) {
                 case 1:
-                    staffHandler.menu();
+                    staffHandler.credential();
+                break;
+                case 2:
+                    guestHandler.menu();
                 break;
                 case 3:
                     isExit = true;
