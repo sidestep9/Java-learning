@@ -1,17 +1,35 @@
 import java.util.ArrayList;
 
 public class GuestLogic {
-    ArrayList<Room> bookings = new ArrayList<>();
     MenuUI menuUI = new MenuUI();
     Hotel hotel;
+    GuestRepository repo = new GuestRepository();
     
     GuestLogic(Hotel hotel) {
         this.hotel = hotel;
     }
     
-    void showBooking() {
+    void guestSignup(String username, int pin) {
+        if(repo.isUsernameTaken(username)) {
+            System.out.println("Username is already taken");
+            return;
+        }
+        if(pin < 100000 || pin > 999999) {
+            System.out.println("PIN must be 6-digit");
+            return;
+        }
+        repo.signup(username, pin);
+    }
+    Guest guestLogin(String username, int pin) {
+        return repo.login(username, pin);
+    }
+    
+    void showBooking(Guest guest) {
+        ArrayList<Room> bookings = guest.getBookings();
         if(bookings.isEmpty()) {
-            System.out.println("You haven't booked any room");
+            menuUI.separator();
+            System.out.println("You haven't booked a room");
+            menuUI.separator();
             return;
         }
         for(Room booking : bookings) {
@@ -21,7 +39,8 @@ public class GuestLogic {
         menuUI.separator();
     }
     
-    void setBooking(int choice, int duration) {
+    void setBooking(Guest guest, int choice, int duration) {
+        ArrayList<Room> bookings = guest.getBookings();
         switch(choice) {
             case 1:
                 for(Room room : hotel.rooms) {
@@ -73,18 +92,26 @@ public class GuestLogic {
         System.out.println("Room unavailable");
     }
     
-    void cancelBook(int id) {
+    void cancelBook(Guest guest, int id) {
+        ArrayList<Room> bookings = guest.getBookings();
         if(bookings.isEmpty()) {
+            menuUI.separator();
             System.out.println("You haven't booked any room");
+            menuUI.separator();
             return;
         }
         for(Room booking : bookings) {
             if(booking.roomId == id) {
+                // wanted to add booking.isAvailable = true; but decided not to and let the staff do that instead
                 bookings.remove(booking);
+                menuUI.separator();
                 System.out.println("Book canceled");
+                menuUI.separator();
                 return;
             }
         }
+        menuUI.separator();
         System.out.println("Room not found");
-    }
+        menuUI.separator();
+    } 
 }

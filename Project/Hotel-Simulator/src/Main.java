@@ -25,7 +25,7 @@ public class Main {
                     staffHandler.credential();
                 break;
                 case 2:
-                    guestHandler.menu();
+                    guestHandler.registration();
                 break;
                 case 3:
                     isExit = true;

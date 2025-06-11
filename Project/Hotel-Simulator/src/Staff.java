@@ -1,10 +1,7 @@
 
-public class Staff {
-    String username;
-    int pin;
+public class Staff extends User{
     
     Staff(String username, int pin) {
-        this.username = username;
-        this.pin = pin;
+        super(username, pin);
     }
 }

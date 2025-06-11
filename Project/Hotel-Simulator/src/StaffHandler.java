@@ -24,7 +24,7 @@ public class StaffHandler {
             return;
         }
         else {
-            System.out.println("Menu");
+            menu();
         }
     }
     
