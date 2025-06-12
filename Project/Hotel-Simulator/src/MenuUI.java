@@ -20,4 +20,20 @@ public class MenuUI {
         separator();
         return choice = InputHandler.inputInt(prompt);
     }
+    
+    boolean confirmation(String prompt) {
+        String input;
+        
+        input = InputHandler.inputText(prompt).trim().toLowerCase();
+        if(input.equals("y") || input.equals("yes")) {
+            return true;
+        }
+        else if(input.equals("n") || input.equals("no")) {
+            return false;
+        }
+        else {
+            System.out.println("Invalid input");
+            return false;
+        }
+    }
 }

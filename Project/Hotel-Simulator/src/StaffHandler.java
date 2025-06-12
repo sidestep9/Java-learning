@@ -42,7 +42,7 @@ public class StaffHandler {
                                      "[4] Exit");
             switch(choice) {
                 case 1:
-                    hotel.showAllRoom();
+                    hotel.showAllRoom(true);
                 break;
                 case 2:
                     searchRoom();

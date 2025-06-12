@@ -74,10 +74,11 @@ public class GuestHandler {
                                      "[2] Show booking",
                                      "[3] Book room",
                                      "[4] Cancel book",
-                                     "[5] Exit");
+                                     "[5] Checkout",
+                                     "[6] Exit");
             switch(choice) {
                 case 1:
-                    hotel.showAllRoom();
+                    hotel.showAllRoom(false);
                 break;
                 case 2:
                     guestLogic.showBooking(guest);
@@ -89,6 +90,9 @@ public class GuestHandler {
                     cancelBook();
                 break;
                 case 5:
+                    checkout();
+                break;
+                case 6:
                     this.guest = null;
                     isExit = true;
                 break;
@@ -109,6 +113,10 @@ public class GuestHandler {
                                  "[3] Twin room",
                                  "[4] Suite");
         duration = InputHandler.inputInt("Enter how long to stay (days): ");
+        if(duration < 1) {
+            System.out.println("Invalid duration");
+            return;
+        }
         guestLogic.setBooking(guest, choice, duration);
     }
     void cancelBook() {
@@ -116,5 +124,20 @@ public class GuestHandler {
         
         id = InputHandler.inputInt("Enter room id: ");
         guestLogic.cancelBook(guest, id);
+    }
+    
+    void checkout() {
+        double total;
+        boolean yesConfirm;
+
+        total = guestLogic.checkout(guest);
+        yesConfirm = menuUI.confirmation("Confirm payment (Y/N): ");
+        if(yesConfirm) {
+            guestLogic.printCheckout(guest, total);
+            System.out.println("Payment recieved. Thank you!");
+        }
+        else {
+            System.out.println("Payment cancelled");
+        }
     }
 }
