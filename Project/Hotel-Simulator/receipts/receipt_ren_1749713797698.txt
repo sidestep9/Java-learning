@@ -1,0 +1,13 @@
+=== HOTEL RECEIPT ===
+
+Guest   : ren
+
+Bookings
+Room 101: Single Room, $50.00 per night, for 2 days
+Room 106: Double Room, $70.00 per night, for 1 days
+Room 109: Twin Room, $70.00 per night, for 6 days
+Room 112: Suite, $200.00 per night, for 365 days
+
+Total   : 73590.00
+
+Thank you for staying with us!
