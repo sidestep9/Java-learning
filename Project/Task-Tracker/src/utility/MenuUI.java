@@ -1,15 +1,21 @@
+package utility;
 
 public class MenuUI {
-    void divider() {
+    public void divider() {
         String sym = "*".repeat(29);
         System.out.println(sym);
     }
-    void separator() {
+    public void separator() {
         String sym = "–".repeat(29);
         System.out.println(sym);
     }
     
-    int showMenu(String title, String prompt, String... options) {
+    public void showMenu1(String... options) {
+        for(String option : options) {
+            System.out.println(option);
+        }
+    }
+    public int showMenu2(String title, String prompt, String... options) {
         int choice;
         
         System.out.println(title);
@@ -20,8 +26,17 @@ public class MenuUI {
         separator();
         return choice = InputHandler.inputInt(prompt);
     }
+    public int showMenu3(String prompt, String... options) {
+        int choice;
+        
+        for(String option : options) {
+            System.out.println(option);
+        }
+        separator();
+        return choice = InputHandler.inputInt(prompt);
+    }
     
-    boolean confirmation(String prompt) {
+    public boolean confirmation(String prompt) {
         String input;
         
         input = InputHandler.inputText(prompt).trim().toLowerCase();
