@@ -2,6 +2,8 @@ import utility.MenuUI;
 import utility.InputHandler;
 import task.TaskManager;
 import task.Task;
+import io.Writer;
+import io.Reader;
 import java.util.ArrayList;
 
 public class Main {
@@ -9,9 +11,13 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
         MenuUI menuUI = new MenuUI();
+        Reader reader = new Reader();
+        Writer writer = new Writer();
         TaskManager taskManager = new TaskManager(tasks);
         boolean isExit = false;
         int choice;
+        
+        reader.readNote(tasks);
         
         do {
             menuUI.divider();
@@ -44,6 +50,8 @@ public class Main {
                     System.out.println("Invalid choice");
             }
         }while(!isExit);
+        
+        writer.printNote(tasks);
+        System.out.println("Goodbye!");
     }
-    
 }

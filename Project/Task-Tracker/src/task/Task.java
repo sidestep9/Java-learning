@@ -14,8 +14,15 @@ public class Task {
         this.id = counter++;
     }
     
+    public Task(int id, String name, String deadline, boolean isDone) {
+        this.name = name;
+        this.deadline = deadline;
+        this.isDone = isDone;
+        this.id = id;
+    }
+    
     public String toString() {
-        return id + ". " + (isDone ? "[✓]" : "[X]") + " " + name + " " + deadline;
+        return id + "|" + (isDone ? "[✓]" : "[X]") + "|" + name + "|" + deadline;
     }
     
     public int getId() {
@@ -30,5 +37,12 @@ public class Task {
     }
     public void setMark(boolean isDone) {
         this.isDone = isDone;
+    }
+    
+    public int getCounter() {
+        return counter;
+    }
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
