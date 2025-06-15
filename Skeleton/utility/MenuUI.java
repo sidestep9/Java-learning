@@ -10,16 +10,25 @@ public class MenuUI {
         System.out.println(sym);
     }
     
-    public void showMenu(String... options) {
+    public void showMenu1(String... options) {
         for(String option : options) {
             System.out.println(option);
         }
     }
-    public int showMenuReader(String title, String prompt, String... options) {
+    public int showMenu2(String title, String prompt, String... options) {
         int choice;
         
         System.out.println(title);
         System.out.println();
+        for(String option : options) {
+            System.out.println(option);
+        }
+        separator();
+        return choice = InputHandler.inputInt(prompt);
+    }
+    public int showMenu3(String prompt, String... options) {
+        int choice;
+        
         for(String option : options) {
             System.out.println(option);
         }
