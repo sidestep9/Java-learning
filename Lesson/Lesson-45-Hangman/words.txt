@@ -1,0 +1,9 @@
+success
+chicken
+pizza
+mountain
+cloud
+thief
+mask
+hero
+villain
