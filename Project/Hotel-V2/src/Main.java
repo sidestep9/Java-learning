@@ -1,0 +1,49 @@
+import utility.MenuUI;
+import utility.InputHandler;
+import user.StaffHandler;
+import user.GuestHandler;
+import hotel.Room;
+
+public class Main {
+    
+    public static void main(String[] args) {
+        MenuUI menu = new MenuUI();
+        Room room = new Room();
+        StaffHandler staffHandler = new StaffHandler(room);
+        GuestHandler guestHandler = new GuestHandler(room);
+        int choice;
+        boolean isExit = false;
+        
+        
+        while(!isExit) {
+            menu.divider();
+            System.out.println("HOTEL SIMULATOR V2");
+            menu.divider();
+            choice = menu.showMenu2("=== MAIN MENU ===",
+                                    "Enter choice: ",
+                                    "[1] Staff",
+                                    "[2] Guest",
+                                    "[3] Exit");
+            switch(choice) {
+                case 1:
+                    staffHandler.authMenu();
+                break;
+                case 2:
+                    guestHandler.authMenu();
+                break;
+                case 3:
+                    isExit = true;
+                break;
+                default:
+                    menu.separator();
+                    System.out.println("Invalid choice");
+            }
+        }
+        
+        menu.divider();
+        System.out.println("Goodbye & have a nice day!");
+        menu.divider();
+        
+    }
+    
+}
