@@ -4,8 +4,12 @@ import hotel.Room;
 import utility.MenuUI;
 
 public class StaffService {
-    HotelService hotelService = new HotelService();
+    HotelService hotelService;
     MenuUI menu = new MenuUI();
+    
+    protected StaffService(HotelService hotelService) {
+        this.hotelService = hotelService;
+    }
     
     protected Room searchRoom(int id) {
         return hotelService.searchRoom(id);

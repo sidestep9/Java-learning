@@ -2,15 +2,15 @@ import utility.MenuUI;
 import utility.InputHandler;
 import user.StaffHandler;
 import user.GuestHandler;
-import hotel.Room;
+import hotel.HotelService;
 
 public class Main {
     
     public static void main(String[] args) {
         MenuUI menu = new MenuUI();
-        Room room = new Room();
-        StaffHandler staffHandler = new StaffHandler(room);
-        GuestHandler guestHandler = new GuestHandler(room);
+        HotelService hotelService = new HotelService();
+        StaffHandler staffHandler = new StaffHandler(hotelService);
+        GuestHandler guestHandler = new GuestHandler(hotelService);
         int choice;
         boolean isExit = false;
         

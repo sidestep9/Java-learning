@@ -2,12 +2,13 @@ package hotel;
 import utility.MenuUI;
 
 public class Room {
-    MenuUI menu = new MenuUI();
+    private MenuUI menu = new MenuUI();
     private int id;
     private static int counter = 101;
     private String type;
     private double price;
     private boolean isBookable;
+    private int duration;
     
     public Room(String type, double price) {
         this.id = counter++;
@@ -43,7 +44,7 @@ public class Room {
         menu.separator();
         System.out.println("Room ID : " + this.id);
         System.out.println("Type    : " + this.type);
-        System.out.println("Duration: " + " night(s)");
+        System.out.println("Duration: " + this.duration + " night(s)");
         menu.separator();
     }
     private void description() {
@@ -90,5 +91,8 @@ public class Room {
         else {
             this.isBookable = true;
         }
+    }
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

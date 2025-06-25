@@ -2,13 +2,16 @@ package user;
 import utility.MenuUI;
 import utility.InputHandler;
 import hotel.Room;
+import hotel.HotelService;
 
 public class StaffHandler {
     MenuUI menu = new MenuUI();
-    StaffService service = new StaffService();
+    HotelService hotelService;
+    StaffService service;
     
-    public StaffHandler(Room room) {
-        
+    public StaffHandler(HotelService hotelService) {
+        this.hotelService = hotelService;
+        this.service = new StaffService(hotelService);
     }
     
     public void authMenu() {
