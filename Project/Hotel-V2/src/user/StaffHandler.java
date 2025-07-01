@@ -8,16 +8,28 @@ public class StaffHandler {
     MenuUI menu = new MenuUI();
     HotelService hotelService;
     StaffService service;
+    Staff staff;
     
     public StaffHandler(HotelService hotelService) {
         this.hotelService = hotelService;
         this.service = new StaffService(hotelService);
     }
     
+    public void staffAccount() {
+        service.staffAccount();
+    }
+    
     public void authMenu() {
+        String username;
+        String password;
+        
         menu.divider();
-        System.out.println("Authentication");
-        mainMenu();
+        username = InputHandler.inputText("Enter username: ");
+        password = InputHandler.inputText("Enter password: ");
+        staff = service.login(username, password);
+        
+        if(staff != null) mainMenu();
+        
     }
     
     private void mainMenu() {

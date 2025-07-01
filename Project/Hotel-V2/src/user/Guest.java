@@ -4,11 +4,15 @@ import hotel.Room;
 
 public class Guest extends User{
     private ArrayList<Room> bookings = new ArrayList<>();
-    private int counter = 101;
+    private static int counter = 101;
     
-    Guest(String username, String password) {
+    public Guest(String username, String password) {
         super(username, password);
         setId(counter++);
+    }
+    public Guest(int id, String username, String password) {
+        super(id, username, password);
+        this.counter = id + 1;
     }
     
     protected ArrayList<Room> getBookings() {
@@ -18,5 +22,8 @@ public class Guest extends User{
         for(Room booking : bookings) {
             booking.displayBookings();
         }
+    }
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }

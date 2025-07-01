@@ -12,6 +12,10 @@ public class GuestService {
         this.hotelService = hotelService;
     }
     
+    protected void guestAccount() {
+        guestRepo.guestAccount();
+    }
+    
     protected void signup(String username, String password) {
         if(guestRepo.validUsername(username)) {
             guestRepo.signup(username, password);
@@ -91,5 +95,15 @@ public class GuestService {
             room.setDuration(0);
             room.setBookable();
         }
+    }
+    protected void checkout(Guest guest) {
+        double total = 0;
+        
+        for(Room book : guest.getBookings()) {
+            total += (book.getPrice() * book.getDuration());
+        }
+        
+        System.out.printf("\nTotal: $%.2f\n",total);
+        guest.getBookings().clear();
     }
 }

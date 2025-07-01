@@ -14,6 +14,8 @@ public class Main {
         int choice;
         boolean isExit = false;
         
+        staffHandler.staffAccount();
+        guestHandler.guestAccount();
         
         while(!isExit) {
             menu.divider();

@@ -6,9 +6,24 @@ import utility.MenuUI;
 public class StaffService {
     HotelService hotelService;
     MenuUI menu = new MenuUI();
+    StaffRepository staffRepo = new StaffRepository();
     
     protected StaffService(HotelService hotelService) {
         this.hotelService = hotelService;
+    }
+    
+    protected void staffAccount() {
+        staffRepo.staffAccount();
+    }
+    
+    protected Staff login(String username, String password) {
+        Staff staff = staffRepo.login(username, password);
+        if(staff != null) {
+            System.out.println("\nWelcome!");
+            return staff;
+        }
+        System.out.println("\nInvalid username/password");
+        return null;
     }
     
     protected Room searchRoom(int id) {

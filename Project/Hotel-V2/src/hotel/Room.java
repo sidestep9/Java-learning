@@ -92,6 +92,9 @@ public class Room {
             this.isBookable = true;
         }
     }
+    public int getDuration() {
+        return this.duration;
+    }
     public void setDuration(int duration) {
         this.duration = duration;
     }

@@ -9,6 +9,11 @@ public abstract class User {
         this.username = username;
         this.password = password;
     }
+    User(int id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
     
     protected void setId(int id) {
         this.id = id;
@@ -18,5 +23,9 @@ public abstract class User {
     }
     protected String getPassword() {
         return this.password;
+    }
+    
+    public String toString() {
+        return this.id + "-" + this.username + "-" + this.password;
     }
 }

@@ -15,6 +15,10 @@ public class GuestHandler {
         this.service = new GuestService(hotelService);
     }
     
+    public void guestAccount() {
+        service.guestAccount();
+    }
+    
     public void authMenu() {
         int choice;
         
@@ -80,6 +84,9 @@ public class GuestHandler {
                 break;
                 case 4:
                     removeBooking();
+                break;
+                case 5:
+                    service.checkout(guest);
                 break;
                 case 6:
                     isExit = true;
