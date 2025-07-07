@@ -3,33 +3,33 @@ import utility.MenuUI;
 
 public class Room {
     private MenuUI menu = new MenuUI();
-    private int id;
     private static int counter = 101;
-    private String type;
-    private double price;
-    private boolean isBookable;
-    private int duration;
+    private final int id = counter++;
+    private final RoomType type;
+    private boolean isBookable = true;
     
-    public Room(String type, double price) {
-        this.id = counter++;
+    public Room(RoomType type) {
         this.type = type;
-        this.price = price;
-        this.isBookable = true;
+    }
+    public Room(int id, RoomType type, boolean isBookable) {
+        this.type = type;
+        this.counter = id + 1;
+        this.isBookable = isBookable;
     }
     
     public void displayInfo() {
         menu.separator();
         System.out.println("Room ID: " + this.id);
-        System.out.println("Type   : " + this.type);
-        System.out.printf("Price  : $%.2f\n", this.price);
-        description();
+        System.out.println("Type   : " + getType());
+        System.out.printf("Price  : $%.2f\n", getPrice());
+        System.out.println(getDescription());
         menu.separator();
     }
     public void displayInfo(boolean isStaff, String rooms, int total, int available) {
         menu.separator();
         if(isStaff) System.out.println("Rooms       : " + rooms);
-        System.out.println("Type        : " + this.type);
-        System.out.printf("Price       : $%.2f\n", this.price);
+        System.out.println("Type        : " + getType());
+        System.out.printf("Price       : $%.2f\n", getPrice());
         if(isStaff) {
             System.out.println("Availability: " + available + "/" + total);
         }
@@ -37,49 +37,32 @@ public class Room {
             System.out.println("Bookable    : " + (available > 0 ? "Yes" : "No"));
         }
         System.out.println();
-        description();
+        System.out.println(getDescription());
         menu.separator();
     }
-    public void displayBookings() {
-        menu.separator();
-        System.out.println("Room ID : " + this.id);
-        System.out.println("Type    : " + this.type);
-        System.out.println("Duration: " + this.duration + " night(s)");
-        menu.separator();
-    }
-    private void description() {
-        switch(this.type) {
-            case "Single":
-                System.out.println("One single bed, a private bathroom, a desk, and free wifi");
-            break;
-            case "Double":
-                System.out.println("One full-size (double) bed, a private bathroom, a smart tv, a desk, and free wifi");
-            break;
-            case "Twin":
-                System.out.println("Two single beds, a private bathroom, a smart tv, a desk, and free wifi");
-            break;
-            case "Suite":
-                System.out.println("One king-sized bed, two single bed, a living room, a private shower, a balcony");
-            break;
-            default:
-                System.out.println("Unknown type");
+    
+    public String toSave(boolean isStaff) {
+        String text;
+        if(isStaff) {
+            text = this.id + "-" + this.type + "-" + this.isBookable;
         }
+        else {
+            text = this.id + "-" + this.type + "-";//duration
+        }
+        return text;
     }
     
     public int getId() {
         return this.id;
     }
-    public String getType() {
+    public RoomType getType() {
         return this.type;
     }
-    public void setType(String type) {
-        this.type = type;
-    }
     public double getPrice() {
-        return this.price;
+        return this.type.basePrice();
     }
-    public void setPrice(double price) {
-        this.price = price;
+    public String getDescription() {
+        return this.type.description();
     }
     public boolean getBookable() {
         return this.isBookable;
@@ -91,11 +74,5 @@ public class Room {
         else {
             this.isBookable = true;
         }
-    }
-    public int getDuration() {
-        return this.duration;
-    }
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 }

@@ -1,6 +1,7 @@
 package user;
 import hotel.HotelService;
 import hotel.Room;
+import hotel.RoomType;
 import utility.MenuUI;
 
 public class StaffService {
@@ -29,8 +30,9 @@ public class StaffService {
     protected Room searchRoom(int id) {
         return hotelService.searchRoom(id);
     }
-    protected void addRoom(String type, double price) {
-        hotelService.getRooms().add(new Room(type, price));
+    protected void addRoom(String type) {
+        RoomType room = RoomType.valueOf(type);
+        hotelService.getRooms().add(new Room(room));
         System.out.println("\nRoom added");
     }
     protected void removeRoom(int id) {
@@ -41,15 +43,11 @@ public class StaffService {
         hotelService.getRooms().remove(room);
         System.out.println("\nRoom removed");
     }
-    protected void editType(String type, Room room) {
-        room.setType(type);
-        System.out.println("\nType changed");
-    }
-    protected void editPrice(double price, Room room) {
-        room.setPrice(price);
-        System.out.println("\nPrice changed");
-    }
-    protected void editBookable(Room room) {
+    protected void editBookable(int id) {
+        Room room = searchRoom(id);
+        
+        if(room == null) return;
+        
         room.setBookable();
         System.out.println("\nBooking status changed");
     }

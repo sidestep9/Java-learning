@@ -1,6 +1,11 @@
 package data;
 import user.Guest;
 import user.Staff;
+import hotel.Room;
+import hotel.RoomType;
+import hotel.Booking;
+import hotel.BookingStatus;
+import hotel.HotelService;
 import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -45,6 +50,51 @@ public class Reader {
         }
         catch(FileNotFoundException e) {
             System.out.println("Staff file not found");
+        }
+        catch(IOException e) {
+            System.out.println("Something went wrong");
+        }
+    }
+    public void readHotelRoom(ArrayList<Room> rooms) {
+        String filePath = "/storage/emulated/0/Java-learning/Project/Hotel-V2/src/data/hotel/room.txt";
+        
+        try(BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\-");
+                int id = Integer.parseInt(parts[0].trim());
+                RoomType roomType = RoomType.valueOf(parts[1].trim().toUpperCase());
+                boolean isBookable = Boolean.parseBoolean(parts[2].trim());
+                
+                rooms.add(new Room(id, roomType, isBookable));
+            }
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("Room file not found");
+        }
+        catch(IOException e) {
+            System.out.println("Something went wrong");
+        }
+    }
+    public void readGuestBooking(Guest guest, ArrayList<Booking> bookings) {
+        HotelService hotelService = new HotelService();
+        String fileName = guest.getId() + "-" + guest.getUsername() + ".txt";
+        String filePath = "/storage/emulated/0/Java-learning/Project/Hotel-V2/src/data/booking/" + fileName;
+        Room room;
+        
+        try(BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\-");
+                int roomId = Integer.parseInt(parts[2].trim());
+                int nights = Integer.parseInt(parts[3].trim());
+                BookingStatus status = BookingStatus.valueOf(parts[4].trim());
+                
+                hotelService.addBooking(guest, roomId, nights, status);
+            }
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("Room file not found");
         }
         catch(IOException e) {
             System.out.println("Something went wrong");

@@ -42,7 +42,7 @@ public class StaffHandler {
                                     "Enter choice: ",
                                     "[1] Add room",
                                     "[2] Remove room",
-                                    "[3] Edit room",
+                                    "[3] Edit booking status",
                                     "[4] Show all rooms",
                                     "[5] Exit");
             switch(choice) {
@@ -53,7 +53,7 @@ public class StaffHandler {
                     removeRoom();
                 break;
                 case 3:
-                    editRoom();
+                    editBookable();
                 break;
                 case 4:
                     service.showAllRoom();
@@ -70,13 +70,11 @@ public class StaffHandler {
     
     private void addRoom() {
         String type;
-        double price;
         
         menu.separator();
-        type = InputHandler.inputName("Enter room type: ");
-        price = InputHandler.inputDouble("Enter room price: ");
+        type = InputHandler.inputName("Enter room type: ").toUpperCase();
         
-        service.addRoom(type, price);
+        service.addRoom(type);
     }
     private void removeRoom() {
         int id;
@@ -86,54 +84,12 @@ public class StaffHandler {
         
         service.removeRoom(id);
     }
-    private void editRoom() {
+    private void editBookable() {
         int id;
-        Room room;
-        int choice;
         
         menu.separator();
-        id = InputHandler.inputInt("Enter room id: ");
-        room = service.searchRoom(id);
+        id = InputHandler.inputInt("Enter room ID: ");
         
-        if(room == null) return;
-        
-        menu.separator();
-        room.displayInfo();
-        menu.separator();
-        
-        choice = menu.showMenu3("Enter choice: ",
-                                "[1] Edit type",
-                                "[2] Edit price",
-                                "[3] Edit booking status");
-        switch(choice) {
-            case 1:
-                editType(room);
-            break;
-            case 2:
-                editPrice(room);
-            break;
-            case 3:
-                editBookable(room);
-            break;
-            default:
-                System.out.println("Invalid choice");
-        }
-    }
-    private void editType(Room room) {
-        String type;
-        
-        menu.separator();
-        type = InputHandler.inputName("Enter new type: ");
-        service.editType(type, room);
-    }
-    private void editPrice(Room room) {
-        double price;
-        
-        menu.separator();
-        price = InputHandler.inputDouble("Enter new price: ");
-        service.editPrice(price, room);
-    }
-    private void editBookable(Room room) {
-        service.editBookable(room);
+        service.editBookable(id);
     }
 }

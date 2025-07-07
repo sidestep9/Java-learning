@@ -15,10 +15,13 @@ public abstract class User {
         this.password = password;
     }
     
+    public int getId() {
+        return this.id;
+    }
     protected void setId(int id) {
         this.id = id;
     }
-    protected String getUsername() {
+    public String getUsername() {
         return this.username;
     }
     protected String getPassword() {

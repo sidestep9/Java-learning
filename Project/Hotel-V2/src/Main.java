@@ -15,7 +15,8 @@ public class Main {
         boolean isExit = false;
         
         staffHandler.staffAccount();
-        guestHandler.guestAccount();
+        guestHandler.readGuestAccount();
+        hotelService.readHotelRoom();
         
         while(!isExit) {
             menu.divider();
@@ -41,6 +42,9 @@ public class Main {
                     System.out.println("Invalid choice");
             }
         }
+        
+        guestHandler.writeGuestAccount();
+        hotelService.writeHotelRoom();
         
         menu.divider();
         System.out.println("Goodbye & have a nice day!");

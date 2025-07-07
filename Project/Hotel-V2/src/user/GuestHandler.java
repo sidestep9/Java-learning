@@ -15,8 +15,11 @@ public class GuestHandler {
         this.service = new GuestService(hotelService);
     }
     
-    public void guestAccount() {
-        service.guestAccount();
+    public void readGuestAccount() {
+        service.readGuestAccount();
+    }
+    public void writeGuestAccount() {
+        service.writeGuestAccount();
     }
     
     public void authMenu() {
@@ -54,6 +57,7 @@ public class GuestHandler {
         username = InputHandler.inputText("Enter username: ");
         password = InputHandler.inputText("Enter password: ");
         guest = service.login(username, password);
+        service.readGuestBooking(guest);
         
         if(guest != null) mainMenu();
     }
@@ -77,7 +81,7 @@ public class GuestHandler {
                     service.showAllRoom();
                 break;
                 case 2:
-                    service.showBookings(guest);
+                    service.showBookings();
                 break;
                 case 3:
                     addBooking();
@@ -89,6 +93,9 @@ public class GuestHandler {
                     service.checkout(guest);
                 break;
                 case 6:
+                    service.writeGuestBooking();
+                    service.clearBooking();
+                    guest = null;
                     isExit = true;
                 break;
                 default:
@@ -99,7 +106,7 @@ public class GuestHandler {
     
     private void addBooking() {
         int choice;
-        int duration;
+        int nights;
         
         menu.divider();
         System.out.println("Choose room\n");
@@ -108,8 +115,8 @@ public class GuestHandler {
                                 "[2] Double",
                                 "[3] Twin",
                                 "[4] Suite");
-        duration = InputHandler.inputInt("Enter duration of stay (nights): ");
-        service.addBooking(guest, choice, duration);
+        nights = InputHandler.inputInt("Enter duration of stay (nights): ");
+        service.addBooking(guest, choice, nights);
     }
     private void removeBooking() {
         int id;

@@ -8,8 +8,11 @@ public class GuestRepository {
     Writer writer = new Writer();
     Reader reader = new Reader();
     
-    protected void guestAccount() {
+    protected void readGuestAccount() {
         reader.readGuestAccount(guests);
+    }
+    protected void writeGuestAccount() {
+        writer.writeGuestAccount(guests); 
     }
     
     protected boolean validUsername(String username) {
@@ -23,7 +26,6 @@ public class GuestRepository {
     protected void signup(String username, String password) {
         Guest guest = new Guest(username, password);
         guests.add(guest);
-        writer.writeGuestAccount(guest);
     }
     protected Guest login(String username, String password) {
         for(Guest guest : guests) {
@@ -33,4 +35,5 @@ public class GuestRepository {
         }
         return null;
     }
+    
 }

@@ -1,8 +1,12 @@
-*** TO ADD ***
-> File I/O
+*** TO DO ***
+> File I/O ✓
+    • Guests acc
+    • Room lists 
+    • Guests bookings
 > Confirmation prompt
 
 
 
 *** BUGS & IMPROVEMENTS ***
-> What if the same room type have different pricing?
+> What if the same room type have different pricing? -> used ENUMS so it isn't possible now.
+> File not found in reader

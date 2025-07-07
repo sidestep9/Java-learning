@@ -1,19 +1,30 @@
 package user;
 import hotel.HotelService;
 import hotel.Room;
+import hotel.RoomType;
 import utility.MenuUI;
 
 public class GuestService {
-    HotelService hotelService;
-    GuestRepository guestRepo = new GuestRepository();
-    MenuUI menu = new MenuUI();
+    private HotelService hotelService;
+    private GuestRepository guestRepo = new GuestRepository();
+    private MenuUI menu = new MenuUI();
     
     protected GuestService(HotelService hotelService) {
         this.hotelService = hotelService;
     }
     
-    protected void guestAccount() {
-        guestRepo.guestAccount();
+    protected void readGuestAccount() {
+        guestRepo.readGuestAccount();
+    }
+    protected void writeGuestAccount() {
+        guestRepo.writeGuestAccount();
+    }
+    
+    protected void readGuestBooking(Guest guest) {
+        hotelService.readGuestBooking(guest);
+    }
+    protected void writeGuestBooking() {
+        hotelService.writeGuestBooking();
     }
     
     protected void signup(String username, String password) {
@@ -34,76 +45,65 @@ public class GuestService {
         System.out.println("\nInvalid username/password");
         return null;
     }
+    protected void clearBooking() {
+        hotelService.getBookings().clear();
+    }
     
     protected void showAllRoom() {
         menu.divider();
         hotelService.showAllRoom(false);
     }
-    protected void showBookings(Guest guest) {
+    protected void showBookings() {
         menu.divider();
-        guest.displayBookings();
+        hotelService.showBookings();
     }
-    protected void addBooking(Guest guest, int choice, int duration) {
-        boolean booked;
+    protected void addBooking(Guest guest, int choice, int nights) {
+        RoomType target;
         
-        for(Room room : hotelService.getRooms()) {
-            if(!room.getBookable()) continue;
-            
-            booked = false;
-            
-            switch(choice) {
-                case 1:
-                    if(!room.getType().equalsIgnoreCase("single")) break;
-                    booked = true;
-                break;
-                case 2:
-                    if(!room.getType().equalsIgnoreCase("double")) break;
-                    booked = true;
-                break;
-                case 3:
-                    if(!room.getType().equalsIgnoreCase("twin")) break;
-                    booked = true;
-                break;
-                case 4:
-                    if(!room.getType().equalsIgnoreCase("suite")) break;
-                    booked = true;
-                break;
-                default:
-                    booked = false;
+        switch(choice) {
+            case 1:
+                target = RoomType.SINGLE;
+            break;
+            case 2:
+                target = RoomType.DOUBLE;
+            break;
+            case 3:
+                target = RoomType.TWIN;
+            break;
+            case 4:
+                target = RoomType.SUITE;
+            break;
+            default:
+                target = null;
             }
-            
-            if(booked) {
-                room.setDuration(duration);
-                room.setBookable();
-                guest.getBookings().add(room);
-                System.out.println();
-                room.displayBookings();
-                System.out.println("\nRoom successfully booked!");
-                return;
-            }
+        
+        if(target == null) {
+            System.out.println("\nRoom unavailable");
+            return;
         }
-        System.out.println("\nRoom unavailable");
+        
+        hotelService.addBooking(guest, target, nights); 
     }
     protected void removeBooking(Guest guest, int id) {
         Room room = hotelService.searchRoom(id);
         
         if(room != null) {
             System.out.println();
-            room.displayBookings();
+            //room.displayBookings();
             System.out.println("\nBooking cancelled");
-            guest.getBookings().remove(room);
-            room.setDuration(0);
+            //guest.getBookings().remove(room);
+            //room.setDuration(0);
             room.setBookable();
         }
     }
     protected void checkout(Guest guest) {
         double total = 0;
         
-        for(Room book : guest.getBookings()) {
+        /*for(Room book : guest.getBookings()) {
             total += (book.getPrice() * book.getDuration());
-        }
+        }*/
         
         System.out.printf("\nTotal: $%.2f\n",total);
-        guest.getBookings().clear();
+        //guest.getBookings().clear();
     }
 }

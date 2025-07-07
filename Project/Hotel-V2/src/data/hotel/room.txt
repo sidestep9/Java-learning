@@ -1,0 +1,12 @@
+101-SINGLE-true
+102-SINGLE-true
+103-SINGLE-true
+104-SINGLE-true
+105-DOUBLE-true
+106-DOUBLE-true
+107-DOUBLE-true
+108-TWIN-true
+109-TWIN-true
+110-TWIN-true
+111-SUITE-true
+112-SUITE-true
