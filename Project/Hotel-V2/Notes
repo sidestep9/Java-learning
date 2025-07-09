@@ -9,4 +9,5 @@
 
 *** BUGS & IMPROVEMENTS ***
 > What if the same room type have different pricing? -> used ENUMS so it isn't possible now.
-> File not found in reader
+> File not found in reader in case for first time guest
+> Reader rooms and HotelService rooms seems different

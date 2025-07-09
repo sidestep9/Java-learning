@@ -119,10 +119,10 @@ public class GuestHandler {
         service.addBooking(guest, choice, nights);
     }
     private void removeBooking() {
-        int id;
+        int roomId;
         
         menu.divider();
-        id = InputHandler.inputInt("Enter room id: ");
-        service.removeBooking(guest, id);
+        roomId = InputHandler.inputInt("Enter room id: ");
+        service.removeBooking(roomId);
     }
 }

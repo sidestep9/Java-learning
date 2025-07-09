@@ -2,6 +2,7 @@ package user;
 import hotel.HotelService;
 import hotel.Room;
 import hotel.RoomType;
+import hotel.Booking;
 import utility.MenuUI;
 
 public class GuestService {
@@ -21,6 +22,7 @@ public class GuestService {
     }
     
     protected void readGuestBooking(Guest guest) {
+        if(guest == null) return;
         hotelService.readGuestBooking(guest);
     }
     protected void writeGuestBooking() {
@@ -84,26 +86,17 @@ public class GuestService {
         
         hotelService.addBooking(guest, target, nights); 
     }
-    protected void removeBooking(Guest guest, int id) {
-        Room room = hotelService.searchRoom(id);
-        
-        if(room != null) {
-            System.out.println();
-            //room.displayBookings();
-            System.out.println("\nBooking cancelled");
-            //guest.getBookings().remove(room);
-            //room.setDuration(0);
-            room.setBookable();
-        }
+    protected void removeBooking(int roomId) {
+        hotelService.removeBooking(roomId);
     }
     protected void checkout(Guest guest) {
         double total = 0;
         
-        /*for(Room book : guest.getBookings()) {
-            total += (book.getPrice() * book.getDuration());
-        }*/
+        for(Booking book : hotelService.getBookings()) {
+            total += (book.getRoom().getPrice() * book.getNights());
+        }
         
         System.out.printf("\nTotal: $%.2f\n",total);
-        //guest.getBookings().clear();
+        hotelService.getBookings().clear(); //should update with time and change booking status
     }
 }

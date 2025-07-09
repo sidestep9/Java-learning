@@ -16,6 +16,7 @@ public class Booking {
     public Booking(Guest guest, Room room, int nights) {
         this.id = COUNTER.getAndIncrement();
         this.guest = guest;
+        room.setBookable();
         this.room = room;
         this.nights = nights;
         this.status = BookingStatus.PENDING;
@@ -23,6 +24,10 @@ public class Booking {
     public Booking(Guest guest, Room room, int nights, BookingStatus status) {
         this.id = COUNTER.getAndIncrement();
         this.guest = guest;
+        if(room.getBookable()) {
+            room.setBookable();
+            System.out.println("work");
+        }
         this.room = room;
         this.nights = nights;
         this.status = status;
@@ -62,6 +67,7 @@ public class Booking {
         System.out.println("Room ID : " + room.getId());
         System.out.println("Type    : " + room.getType());
         System.out.println("Duration: " + this.nights + " night(s)");
+        System.out.printf("Price   : %.2f$ per night\n", room.getPrice());
         menu.separator();
     }
     

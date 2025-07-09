@@ -5,7 +5,6 @@ import hotel.Room;
 import hotel.RoomType;
 import hotel.Booking;
 import hotel.BookingStatus;
-import hotel.HotelService;
 import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -76,8 +75,7 @@ public class Reader {
             System.out.println("Something went wrong");
         }
     }
-    public void readGuestBooking(Guest guest, ArrayList<Booking> bookings) {
-        HotelService hotelService = new HotelService();
+    public void readGuestBooking(Guest guest,ArrayList<Room> rooms, ArrayList<Booking> bookings) {
         String fileName = guest.getId() + "-" + guest.getUsername() + ".txt";
         String filePath = "/storage/emulated/0/Java-learning/Project/Hotel-V2/src/data/booking/" + fileName;
         Room room;
@@ -90,7 +88,9 @@ public class Reader {
                 int nights = Integer.parseInt(parts[3].trim());
                 BookingStatus status = BookingStatus.valueOf(parts[4].trim());
                 
-                hotelService.addBooking(guest, roomId, nights, status);
+                room = searchRoom(rooms, roomId);
+                if(room == null) return;
+                bookings.add(new Booking(guest, room, nights, status));
             }
         }
         catch(FileNotFoundException e) {
@@ -99,5 +99,15 @@ public class Reader {
         catch(IOException e) {
             System.out.println("Something went wrong");
         }
+    }
+    
+    private Room searchRoom(ArrayList<Room> rooms, int id) {
+        for(Room room : rooms) {
+            if(room.getId() == id) {
+                return room;
+            }
+        }
+        System.out.println("\nRoom not found");
+        return null;
     }
 }

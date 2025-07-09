@@ -24,7 +24,7 @@ public class HotelService {
         writer.writeHotelRoom(rooms);
     }
     public void readGuestBooking(Guest guest) {
-        reader.readGuestBooking(guest, bookings);
+        reader.readGuestBooking(guest, rooms, bookings);
     }
     public void writeGuestBooking() {
         writer.writeGuestBooking(bookings);
@@ -37,6 +37,19 @@ public class HotelService {
             }
         }
         System.out.println("\nRoom not found");
+        return null;
+    }
+    public Booking searchBooking(int roomId) {
+        if(bookings == null || bookings.isEmpty()) {
+            System.out.println("\nYou haven't booked any room");
+            return null;
+        }
+        for(Booking booking : bookings) {
+            if(booking.getRoom().getId() == roomId) {
+                return booking;
+            }
+        }
+        System.out.println("\nBooking not found");
         return null;
     }
     public Room searchAvailableRoom(RoomType type) {
@@ -103,11 +116,15 @@ public class HotelService {
         bookings.add(new Booking(guest, room, nights));
         System.out.println("Booked");
     }
-    public void addBooking(Guest guest, int roomId, int nights, BookingStatus status) {
-        Room room = searchRoom(roomId);
-            
-        if(room == null) return;
-            
-        bookings.add(new Booking(guest, room, nights, status));
+    public void removeBooking(int roomId) {
+        Booking booking = searchBooking(roomId);
+        
+        if(booking != null) {
+            System.out.println();
+            booking.displayInfo();
+            System.out.println("\nBooking cancelled");
+            booking.getRoom().setBookable();
+            bookings.remove(booking);
+        }
     }
 }
