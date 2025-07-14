@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.HashMap;
 
 public class Main {
@@ -11,8 +12,7 @@ public class Main {
         String input;
         String[] parts;
         String word;
-        HashMap<String, Integer> frequencies = new HashMap<>();
-        int counter;
+        Map<String, Integer> frequencies = new HashMap<>();
         
         System.out.print("Enter sentence: ");
         input = scanner.nextLine().trim();
@@ -21,22 +21,15 @@ public class Main {
         
         for(String part : parts) {
             word = part.toLowerCase().trim();
-            if(frequencies.containsKey(word)) continue;
-            counter = 0;
-            
-            for(String p : parts) {
-                if(word.equalsIgnoreCase(p)) {
-                    counter++;
-                }
-            }
-            
-            frequencies.put(word, counter);
+            frequencies.put(word, frequencies.getOrDefault(word, 0) + 1);
         }
         
         System.out.println("Word frequencies: ");
         for(String freq : frequencies.keySet()) {
             System.out.println(freq + ": " + frequencies.get(freq));
         }
+        
+        System.out.print("Most frequent words: ");
         
         
         scanner.close();
