@@ -1,0 +1,49 @@
+** ROADMAP **
+1. Register students
+    • Name
+    • Their subject lists + grades
+2. Show sumarry report
+    • Name
+    • Subjects : Grades
+    • Average grades
+    • Grade classification:
+        > A (>= 90)
+        > B (>= 80)
+        > C (>= 70)
+        > D (>= 60)
+        > F (< 60)
+3. Show:
+    • Search students by name or id
+    • Update a grade for students
+    • Show top students based on average grade
+
+** BUGS **
+
+
+** IMPROVEMENTS **
+• Prompt for registering new student with the same name
+
+** FILE STRUCTURE **
+src/
+    notes.txt
+    Main.Java
+    core/
+        AppHub.Java
+    admin/
+        Admin.Java
+        AdminHandler.Java
+        AdminService.Java
+        AdminRepository.Java
+    student/
+        Student.Java
+        StudentHandler.Java
+        StudentService.Java
+        StudentRepository.Java
+    subject/
+        Subject.Java
+        SubjectRepository.Java
+    grade/
+        Grade.Java
+    utility/
+        MenuUI.Java
+        InputHandler.Java
