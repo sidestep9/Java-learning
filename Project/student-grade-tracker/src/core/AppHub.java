@@ -1,7 +1,8 @@
 package core;
+import java.util.ArrayList;
 import student.Student;
 import student.StudentRepository;
-import subject.Subject;
+import subject.SubjectRepository;
 
 public class AppHub {
     private static StudentRepository studentRepo = new StudentRepository();
@@ -12,5 +13,11 @@ public class AppHub {
     }
     public static Student searchStudent(String target) {
         return studentRepo.searchStudent(target);
+    }
+    public static void addSubject(String name, String professor) {
+        subjectRepo.addSubject(name, professor);
+    }
+    public static ArrayList<String> subjectList() {
+        return subjectRepo.subjectList();
     }
 }

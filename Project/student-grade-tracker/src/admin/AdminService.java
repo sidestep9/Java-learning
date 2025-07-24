@@ -1,4 +1,5 @@
 package admin;
+import java.util.ArrayList;
 import core.AppHub;
 import student.Student;
 
@@ -7,14 +8,17 @@ public class AdminService {
     protected void registerStudent(String name) {
         AppHub.registerStudent(name);
     }
-    protected void searchStudent(String target) {
+    protected Student searchStudent(String target) {
         Student student = AppHub.searchStudent(target);
         
-        if(student == null) {
-            System.out.println("Student not found");
-            return;
-        }
+        if(student == null) return null;
         
-        System.out.println(student.toString());
+        return student;
+    }
+    protected void addSubject(String name, String professor) {
+        AppHub.addSubject(name, professor);
+    }
+    protected ArrayList<String> subjectList() {
+        return AppHub.subjectList();
     }
 }

@@ -1,6 +1,9 @@
 package admin;
+import java.util.List;
+import java.util.ArrayList;
 import utility.MenuUI;
 import utility.InputHandler;
+import student.Student;
 
 public class AdminHandler {
     MenuUI menuUI = new MenuUI();
@@ -15,7 +18,8 @@ public class AdminHandler {
                                       "Enter choice: ",
                                       "[1] Register student",
                                       "[2] Search student",
-                                      "[4] Add subject",
+                                      "[3] Add subject",
+                                      "[4] Assign subject",
                                       "[9] Exit");
             switch(choice) {
                 case 1:
@@ -24,8 +28,11 @@ public class AdminHandler {
                 case 2:
                     searchStudent();
                 break;
-                case 4:
+                case 3:
                     addSubject();
+                break;
+                case 4:
+                    assignSubject();
                 break;
                 case 9:
                     return;
@@ -45,14 +52,41 @@ public class AdminHandler {
     }
     private void searchStudent() {
         String target;
+        Student student;
         
         menuUI.divider();
         target = InputHandler.inputName("Enter ID/name: ");
-        adminService.searchStudent(target);
+        student = adminService.searchStudent(target);
+        if(student == null) {
+            System.out.println("Student not found");
+            return;
+        }
+        student.toString();
     }
     
     private void addSubject() {
         String name;
         String professor;
+        
+        menuUI.divider();
+        name = InputHandler.inputName("Enter subject name: ");
+        professor = InputHandler.inputName("Enter professor: ");
+        adminService.addSubject(name, professor);
+    }
+    private void assignSubject() {
+        String target;
+        Student student;
+        List<String> subjectList;
+        
+        menuUI.divider();
+        target = InputHandler.inputName("Enter ID/name: ");
+        student = adminService.searchStudent(target);
+        if(student == null) {
+            System.out.println("Student not found");
+            return;
+        }
+        student.toString();
+        
+        subjectList = adminService.subjectList();
     }
 }
